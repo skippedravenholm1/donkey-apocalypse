@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <style>
+            * {
+                text-align: center;
+                font-family: 'Raleway', sans-serif;
+                color: white;
+            }
+            
+            .dropdown-submenu {
+                position: relative;
+            }
+            
+            .dropdown-submenu .dropdown-menu {
+                top: 0;
+                left: 100%;
+                margin-top: -1px;
+            }
+            
+            body, html {
+                height: 100%;
+                margin: 0;
+                background-color: #0A0908;
+                text-align: center;
+            }
+            
+            h1 {
+                color: white;
+            }
+
+            #wasteland {
+                width: 50%;
+                height: 50%;
+                background-image: url("wasteland.png");
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+                margin: auto;
+            }
+            
+            #leftfight {
+                width: 25%;
+                float: left;
+            }
+            
+            #rightfight {
+                width: 25%;
+                float: right;
+            }
+            
+            button {
+                color: black;
+            }
+            
+            tr, table {
+                margin: 0 auto;
+                border: 1px solid white;
+                border-color: white;
+            }
+            
+            table {
+                display: inline-block;
+            }
+            
+            #middle {
+                text-align: center;
+            }
+            
+            img {
+                width: 50%;
+                margin-top: auto;
+            }
+            
+            .animals {
+                float: left;
+            }
+            
+            /* Dropdown Button */
+            .dropbtn {
+                background-color: #4CAF50;
+                color: white;
+                padding: 16px;
+                font-size: 16px;
+                border: none;
+            }
+            
+            /* The container <div> - needed to position the dropdown content */
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
+            
+            /* Dropdown Content (Hidden by Default) */
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f1f1f1;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+            }
+            
+            /* Links inside the dropdown */
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+            
+            /* Change color of dropdown links on hover */
+            .dropdown-content a:hover {background-color: #ddd;}
+            
+            /* Show the dropdown menu on hover */
+            .dropdown:hover .dropdown-content {display: block;}
+            
+            /* Change the background color of the dropdown button when the dropdown content is shown */
+            .dropdown:hover .dropbtn {background-color: #3e8e41;}
+            
+            
+        </style>
+    </head>
+    <body>
+        <h1>THE WASTELAND</h1>
+        <hr>
+        <div id="wasteland">
+            
+            <div id="leftfight">
+            <br><br><br><br>
+            <img width ="75%" src="donkey.png" id="donkey_image">
+            <br>
+            <img width ="75%" src="camel.png" id="camel_image" class="invis">
+            <br>
+            <img width ="75%" src="zebra.png" id="zebra_image" class="invis">
+            <br>
+            <img width ="75%" src="mule.png" id="mule_image" class="invis">
+            </div>
+            
+            <div id="rightfight">
+            <br><br><br><br><br><br><br><br>
+            <img id="challenger" width ="75%" src="">
+            </div>
+        </div>
+        <br>
+        <h3 id="turn">[CHARACTER]'s TURN</h3>
+        <p id="fight_info"></p>
+        <div id="option_buttons">
+            <button id="attack_button" onclick="attack()">Attack</button>
+            <div class="container">                                     
+              <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Switch Weapons
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li><a tabindex="-1" href="#">HTML</a></li>
+                  <li><a tabindex="-1" href="#">CSS</a></li>
+                  <li class="dropdown-submenu">
+                    <a class="test" tabindex="-1" href="#">New dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
+                      <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="dropdown">
+              <button class="dropbtn">Eat Food</button>
+              <div class="dropdown-content">
+                <button onclick = "donkey_food_consummation()">Donkey</button> 
+                <button onclick = "zebra_food_consummation()">Zebra</button>
+                <button onclick = "camel_food_consummation()">Camilton</button>
+                <button onclick = "mule_food_consummation()">Mule</button>
+              </div>
+            </div>
+        </div>
+        <button id="encounter" onclick="waste_encounter()">Travel</button>
+        <button id="next" onclick="next()">Next</button>
+        <button id="jerhy" onclick="jerhy()">Portal</button>
+        <br>
+        
+     
+        
+        
+        <table id="hp">
+            <tr>
+                <td>ANIMALS</td>
+            </tr>
+            <tr id="donkey_hpbar">
+                <td>DONKEY</td>
+                <td>HP: 10</td>
+                <td>WEAPON: NULL</td>
+            </tr>
+            <tr  id="zebra_hpbar">
+                
+            </tr>
+            <tr id="camel_hpbar">
+                
+            </tr>
+            <tr id="mule_hpbar">
+                
+            </tr>
+        </table>
+        
+        <table id="weapon_table">
+            <tr>
+                <td>WEAPONS:</td>
+            </tr>
+            <tr>
+
+            </tr>
+        </table>
+        <table id="food_table">
+            <tr id="foodrow">
+                <td>FOOD:</td>
+            </tr>
+        </table>
+        <!--audio id="myAudio" controls autoplay>
+              <source src="donkey.m4a" type="audio/m4a">
+              <source src="camel.m4a" type="audio/m4a">
+              <source src="zebra.m4a" type="audio/m4a">
+              Your browser does not support the audio element.
+        </audio-->
+        <script>
+        /*global $ */
+        $(document).ready(function(){
+          $('.dropdown-submenu a.test').on("click", function(e){
+            $(this).next('ul').toggle();
+            e.stopPropagation();
+            e.preventDefault();
+          });
+        });
+        
+        //Party Names(Added for convenience by Mukund)
+        var donkey_name = "donkey"
+        var zebra_name = "zebra"
+        var camel_name = "camel"
+        var mule_name = "mule"
+        
+        //Party weapons
+        var donkey_weapon = "hooves";
+        var camel_weapon = "hooves";
+        var zebra_weapon = "hooves";
+        var mule_weapon = "hooves";
+            
+        //Party Health
+            var donkey_hp = 25;
+            var zebra_hp = 0;
+            var camel_hp = 0;
+            var mule_hp = 10;
+            
+        //Party members
+            var camel_enable = false;
+            var zebra_enable = false;
+            var mule_enable = false;
+            
+        //gold stuffs
+            var generateGold = 0;
+            var goldAmmount = 0;
+            
+            animals();    
+        
+        //Encounter Systems
+            var generate_waste_encounter;
+            var areas = 0;
+            
+            function waste_encounter() {
+                areas = areas + 1;
+                if (areas === 15) {
+                    document.getElementById("wasteland").style.backgroundImage = "url('city.png')"; 
+                }
+                
+                document.getElementById("option_buttons").style.visibility = "hidden";
+                generate_waste_encounter = Math.floor(Math.random() * 4);
+                if (areas === 30) {
+                    generate_waste_encounter = -1;
+                    portal();
+                }
+                if (generate_waste_encounter === 0) {
+                    raider();
+                    document.getElementById("challenger").src = "raider.png.png";
+                }
+                if (generate_waste_encounter === 1) {
+                    creeper();
+                    document.getElementById("challenger").src = "creeper.png";
+                }
+                if (generate_waste_encounter === 2) {
+                    poacher();
+                    document.getElementById("challenger").src = "poacher.png";
+                }
+                if (generate_waste_encounter === 3) {
+                    food();
+                }
+            }
+            
+            var weapon_random;
+            function weapons() {
+                document.getElementById("next").style.visibility = "hidden";
+                weapon_random = Math.floor(Math.random() * 6);
+                if (weapon_random === 0) {
+                    document.getElementById("turn").innerHTML = "You found a Baseball Bat!";
+                    document.getElementById("fight_info").innerHTML ="added to your inventory";
+                    document.getElementById("challenger").src = "bat.png";
+                    var weapon_table1 = document.getElementById("weapon_table");
+                    var row = weapon_table1.insertRow(1);
+                    var cell1 = row.insertCell(0);
+                    cell1.innerHTML = "Baseball Bat";
+                    }
+                
+                if (weapon_random === 1) {
+                    document.getElementById("turn").innerHTML = "You found Machine Gun!";
+                    document.getElementById("fight_info").innerHTML ="added to your inventory";
+                    document.getElementById("challenger").src = "machinegun.png";
+                    var weapon_table2 = document.getElementById("weapon_table");
+                    var row2 = weapon_table2.insertRow(1);
+                    var cell2 = row2.insertCell(0);
+                    cell2.innerHTML = "Machine Gun";
+                }
+                
+                if (weapon_random === 2) {
+                    document.getElementById("turn").innerHTML = "You found a Revolver!";
+                    document.getElementById("fight_info").innerHTML ="added to your inventory";
+                    document.getElementById("challenger").src = "revolver.png";
+                    var weapon_table3 = document.getElementById("weapon_table");
+                    var row3 = weapon_table3.insertRow(1);
+                    var cell3 = row3.insertCell(0);
+                    cell3.innerHTML = "Revolver";
+                }
+                
+                if (weapon_random === 3) {
+                    document.getElementById("turn").innerHTML = "You found RPG!";
+                    document.getElementById("fight_info").innerHTML ="added to your inventory";
+                    document.getElementById("challenger").src = "rpg.png";
+                    var weapon_table4 = document.getElementById("food_table");
+                    var row4 = weapon_table4.insertRow(1);
+                    var cell4 = row4.insertCell(0);
+                    cell4.innerHTML = "RPG";
+                }
+                
+                if (weapon_random === 4) {
+                    document.getElementById("turn").innerHTML = "You found a Shotgun!";
+                    document.getElementById("fight_info").innerHTML ="added to your inventory";
+                    document.getElementById("challenger").src = "shotgun.png";
+                    var weapon_table5 = document.getElementById("food_table");
+                    var row5 = weapon_table5.insertRow(1);
+                    var cell5 = row5.insertCell(0);
+                    cell5.innerHTML = "Shotgun";
+                }
+                
+                if (weapon_random === 5) {
+                    document.getElementById("turn").innerHTML = "You found a Sword!";
+                    document.getElementById("fight_info").innerHTML ="added to your inventory";
+                    document.getElementById("challenger").src = "sword.png";
+                    var weapon_table6 = document.getElementById("weapon_table");
+                    var row6 = weapon_table6.insertRow(1);
+                    var cell6 = row.insertCell(0);
+                    cell6.innerHTML = "Sword";
+                    }
+                
+                if (areas === 30) {
+                    //portal 
+                }
+            }
+            
+            //Food System
+
+
+
+            var food_random;
+            function food() {
+                document.getElementById("next").style.visibility = "hidden";
+                food_random = Math.floor(Math.random() * 5);
+                if (food_random === 0) {
+                    document.getElementById("turn").innerHTML = "You found a Waffle!";
+                    document.getElementById("fight_info").innerHTML ="added to your inventory";
+                    document.getElementById("challenger").src = "waffle.png";
+                    var food_table1 = document.getElementById("food_table");
+                    var row = food_table1.insertRow(1);
+                    var cell1 = row.insertCell(0);
+                    cell1.innerHTML = "Waffle";
+                    amountOfFood++;
+                }
+                
+                if (food_random === 1) {
+                    document.getElementById("turn").innerHTML = "You found Hot Sauce!";
+                    document.getElementById("fight_info").innerHTML ="added to your inventory";
+                    document.getElementById("challenger").src = "hotsauce.png";
+                    var food_table2 = document.getElementById("food_table");
+                    var row2 = food_table2.insertRow(1);
+                    var cell2 = row2.insertCell(0);
+                    cell2.innerHTML = "Hot Sauce";
+                    amountOfFood++;
+                }
+                
+                if (food_random === 2) {
+                    document.getElementById("turn").innerHTML = "You found a Tomato!";
+                    document.getElementById("fight_info").innerHTML ="added to your inventory";
+                    document.getElementById("challenger").src = "tomato.png";
+                    var food_table3 = document.getElementById("food_table");
+                    var row3 = food_table3.insertRow(1);
+                    var cell3 = row3.insertCell(0);
+                    cell3.innerHTML = "Tomato";
+                    amountOfFood++;
+                }
+                
+                if (food_random === 3) {
+                    document.getElementById("turn").innerHTML = "You found canned food!!";
+                    document.getElementById("fight_info").innerHTML ="added to your inventory";
+                    document.getElementById("challenger").src = "can.png";
+                    var food_table4 = document.getElementById("food_table");
+                    var row4 = food_table4.insertRow(1);
+                    var cell4 = row4.insertCell(0);
+                    cell4.innerHTML = "Canned Food";
+                    amountOfFood++;
+                }
+                
+                if (food_random === 4) {
+                    document.getElementById("turn").innerHTML = "You found a Parfait!";
+                    document.getElementById("fight_info").innerHTML ="added to your inventory";
+                    document.getElementById("challenger").src = "asdf.png";
+                    var food_table5 = document.getElementById("food_table");
+                    var row5 = food_table5.insertRow(1);
+                    var cell5 = row5.insertCell(0);
+                    cell5.innerHTML = "Parfait";
+                    amountOfFood++;
+                }
+            }
+            
+            var amountOfFood = 0;
+            
+            //Eat the food
+            function donkey_food_consummation() {
+                document.getElementById("fight_info").innerHTML = "You eat food";
+                document.getElementById("next").style.visibility = "visible";
+                document.getElementById("option_buttons").style.visibility = "hidden";
+                if (amountOfFood < 0) {
+                    donkey_hp = donkey_hp + 0;
+                }
+                else if (amountOfFood > 0) {
+                    donkey_hp = donkey_hp + 5;
+                }
+                
+                amountOfFood = amountOfFood - 1;
+                document.getElementById("food_table").deleteRow(-1);
+            }    
+            function zebra_food_consummation() {
+                document.getElementById("fight_info").innerHTML = "You eat food";
+                document.getElementById("next").style.visibility = "visible";
+                document.getElementById("option_buttons").style.visibility = "hidden";
+                if (amountOfFood < 0) {
+                    zebra_hp = zebra_hp + 0;
+                }
+                else if (amountOfFood > 0) {
+                    zebra_hp = zebra_hp + 5;
+                }
+                
+                amountOfFood = amountOfFood - 1
+                document.getElementById("food_table").deleteRow(-1);
+            }
+            
+            function camel_food_consummation() {
+                document.getElementById("fight_info").innerHTML = "You eat food";
+                document.getElementById("next").style.visibility = "visible";
+                document.getElementById("option_buttons").style.visibility = "hidden";
+                if (amountOfFood < 0) {
+                    camel_hp = camel_hp + 0;
+                }
+                else if (amountOfFood > 0) {
+                    camel_hp = camel_hp + 5;
+                }
+                
+                amountOfFood = amountOfFood - 1
+                document.getElementById("food_table").deleteRow(-1);
+            }
+            
+             function mule_food_consummation() {
+                document.getElementById("fight_info").innerHTML = "You eat food";
+                document.getElementById("next").style.visibility = "visible";
+                document.getElementById("option_buttons").style.visibility = "hidden";
+                if (amountOfFood < 0) {
+                    mule_hp = mule_hp + 0;
+                }
+                else if (amountOfFood > 0) {
+                    mule_hp = mule_hp + 5;
+                }
+                
+                amountOfFood = amountOfFood - 1
+                document.getElementById("food_table").deleteRow(-1);
+            }
+            function creeper() {
+                document.getElementById("challenger").src = "creeper.png";
+                enemy_hp = 10;
+                enemy_attack = 5;
+                enemy_name = "Creeper";
+                enemy_drop_name = "nothing";
+                enemy_drop;
+                fight();
+            }
+            
+            function raider() {
+                document.getElementById("challenger").src = "raider.png.png";
+                enemy_hp = 10;
+                enemy_attack = 5;
+                enemy_name = "Raider";
+                enemy_drop_name = "3 bullets";
+                enemy_drop = "bullets";
+                fight();
+            }
+            
+            function poacher() {
+                document.getElementById("challenger").src = "poacher.png";
+                enemy_hp = 5;
+                enemy_attack = 10;
+                enemy_name = "Poacher";
+                enemy_drop_name = "1 shotgun shell";
+                enemy_drop = "shell";
+                fight();
+            }
+            
+            function portal() {
+                document.getElementById("challenger").src = "portal.gif";
+                enemy_hp = 10;
+                enemy_attack = 0;
+                enemy_name = "Portal";
+                enemy_drop_name = "1 shotgun shell";
+                enemy_drop = "shell";
+                fight();
+            }
+            
+            function jerhy() {
+                document.getElementById("challenger").src = "jerhy.gif";
+                document.getElementById("jerhy").style.visibility = "hidden";
+                document.getElementById("wasteland").style.backgroundImage = "url('boss.gif')"; 
+                enemy_hp = 50;
+                enemy_attack = 20;
+                enemy_name = "Jerhy";
+                enemy_drop_name = "1 shotgun shell";
+                enemy_drop = "shell";
+                fight();
+            }
+            
+            //Enemy Stats    
+            var enemy_hp;
+            var enemy_attack;
+            var enemy_name;
+            var enemy_drop_name;
+            var enemy_drop;
+            var attack_victim_random;
+            var attacked_character ="";
+            
+            function fight() {
+                document.getElementById("option_buttons").style.visibility = "hidden";
+                document.getElementById("encounter").style.visibility = "hidden";
+                document.getElementById("next").style.visibility = "visible";
+                document.getElementById("turn").innerHTML = enemy_name + "'s turn";
+                attack_victim_random = Math.floor(Math.random() * 4);
+                if (attack_victim_random === 0) {
+                    attacked_character = "Donkey";
+                    donkey_hp = donkey_hp - enemy_attack;
+                    document.getElementById("fight_info").innerHTML = enemy_name + " attacks " + attacked_character + ". -" + enemy_attack + " health";
+                }
+                if (attack_victim_random === 1) {
+                    attacked_character = "Camel";
+                    camel_hp = camel_hp - enemy_attack;
+                    if (camel_enable === true) {
+                        document.getElementById("fight_info").innerHTML = enemy_name + " attacks " + attacked_character + ". -" + enemy_attack + " health";
+                    } else {
+                        document.getElementById("fight_info").innerHTML = enemy_name + "'s attack missed!";
+                    }
+                }
+                if (attack_victim_random === 2) {
+                    attacked_character = "Zebra";
+                    zebra_hp = zebra_hp - enemy_attack;
+                    if (zebra_enable === true) {
+                        document.getElementById("fight_info").innerHTML = enemy_name + " attacks " + attacked_character + ". -" + enemy_attack + " health";
+                    } else {
+                        document.getElementById("fight_info").innerHTML = enemy_name + "'s attack missed!";
+                    }
+                }
+                if (attack_victim_random === 3) {
+                    attacked_character = "Mule";
+                    mule_hp = mule_hp - enemy_attack;
+                    if (mule_enable === true) {
+                        document.getElementById("fight_info").innerHTML = enemy_name + " attacks " + attacked_character + ". -" + enemy_attack + " health";
+                    } else {
+                        document.getElementById("fight_info").innerHTML = enemy_name + "'s attack missed!";
+                    }
+                    
+                }
+                
+                
+            
+                /*if (enemy_name === "Poacher" || enemy_name === "Raider" || enemy_name === "Creeper") {
+                    var elem = document.getElementById("fight");
+                    elem.parentNode.removeChild(elem);
+                
+                    var elem2 = document.getElementById("items");
+                    elem2.parentNode.removeChild(elem2);
+                
+                    var elem3 = document.getElementById("run");
+                    elem3.parentNode.removeChild(elem3);
+                }*/
+            
+                animal_turn = -1;
+            }
+            
+
+            
+        
+            
+            if (animal_turn === 0) {
+                var parent = document.getElementById("option_buttons");
+                var child = document.getElementById("dropdown");
+                parent.removeChild(child);
+            }
+            
+            if (animal_turn === 2) {
+                var parent = document.getElementById("option_buttons");
+                var child = document.getElementById("dropdown");
+                parent.removeChild(child);
+            }
+            
+            if (animal_turn === 3) {
+                var parent = document.getElementById("option_buttons");
+                var child = document.getElementById("dropdown");
+                parent.removeChild(child);
+            }
+                
+            
+            
+            function donkeyAttack(){
+                if (donkey_weapon == "hooves"){
+                    enemy_hp = enemy_hp - 5; 
+                }
+                if (donkey_weapon == "bat"){
+                    enemy_hp = enemy_hp - 6;
+                }
+                if (donkey_weapon == "sword"){
+                    enemy_hp = enemy_hp - 7;
+                }
+                if (donkey_weapon == "revolver"){
+                    enemy_hp = enemy_hp - 8;
+                }
+                if (donkey_weapon == "shotgun"){
+                    enemy_hp = enemy_hp - 9;
+                }
+                if (donkey_weapon == "machinegun"){
+                    enemy_hp = enemy_hp - 10;
+                }
+                if (donkey_weapon == "rpg"){
+                    enemy_hp = enemy_hp - 11;
+                }
+            }
+            function camelAttack(){
+                if (camel_weapon == "hooves"){
+                    enemy_hp = enemy_hp - 5; 
+                }
+                if (camel_weapon == "bat"){
+                    enemy_hp = enemy_hp - 6;
+                }
+                if (camel_weapon == "sword"){
+                    enemy_hp = enemy_hp - 7;
+                }
+                if (camel_weapon == "revolver"){
+                    enemy_hp = enemy_hp - 8;
+                }
+                if (camel_weapon == "shotgun"){
+                    enemy_hp = enemy_hp - 9;
+                }
+                if (camel_weapon == "machinegun"){
+                    enemy_hp = enemy_hp - 10;
+                }
+                if (camel_weapon == "rpg"){
+                    enemy_hp = enemy_hp - 11;
+                }
+            }
+            function zebraAttack(){
+                if (donkey_weapon == "hooves"){
+                    enemy_hp = enemy_hp - 5; 
+                }
+                if (zebra_weapon == "bat"){
+                    enemy_hp = enemy_hp - 6;
+                }
+                if (zebra_weapon == "sword"){
+                    enemy_hp = enemy_hp - 7;
+                }
+                if (zebra_weapon == "revolver"){
+                    enemy_hp = enemy_hp - 8;
+                }
+                if (zebra_weapon == "shotgun"){
+                    enemy_hp = enemy_hp - 9;
+                }
+                if (zebra_weapon == "machinegun"){
+                    enemy_hp = enemy_hp - 10;
+                }
+                if (zebra_weapon == "rpg"){
+                    enemy_hp = enemy_hp - 11;
+                }
+            }
+            function muleAttack(){
+                if (mule_weapon == "hooves"){
+                    enemy_hp = enemy_hp - 5; 
+                }
+                if (mule_weapon == "bat"){
+                    enemy_hp = enemy_hp - 6;
+                }
+                if (mule_weapon == "sword"){
+                    enemy_hp = enemy_hp - 7;
+                }
+                if (mule_weapon == "revolver"){
+                    enemy_hp = enemy_hp - 8;
+                }
+                if (mule_weapon == "shotgun"){
+                    enemy_hp = enemy_hp - 9;
+                }
+                if (mule_weapon == "machinegun"){
+                    enemy_hp = enemy_hp - 10;
+                }
+                if (mule_weapon == "rpg"){
+                    enemy_hp = enemy_hp - 11;
+                }
+            }
+            function death_detection() {
+                if (camel_hp < 1) {
+                    camel_hp = 0;
+                    camel_enable = false;
+                }
+                if (donkey_hp < 1) {
+                    window.location.href = "gameover.html";
+                    donkey_hp = 1;
+                }
+                if (zebra_hp < 1) {
+                    zebra_hp = 0;
+                    zebra_enable = false;
+                    
+                }
+                if (mule_hp < 1) {
+                    mule_hp = 0;
+                    mule_enable = false;
+                   
+                }
+            }
+            function randomGoldDrop(){
+                generateGold = Math.floor(Math.random() * 4);
+                if (generateGold == 0){
+                    goldAmmount = (goldAmmount + 0);
+                }
+                if (generateGold == 1){
+                    goldAmmount = (goldAmmount + 5);
+                }
+                if (generateGold == 2){
+                    goldAmmount = (goldAmmount + 10);
+                }
+                if (generateGold == 3){
+                    goldAmmount = (goldAmmount + 15);
+                }
+                if (generateGold == 4){
+                    goldAmmount = (goldAmmount + 20);
+                }
+            }
+            function alive_detection() {
+                if (camel_hp > 0) {
+                    camel_enable = true;
+                }
+                if (zebra_hp > 0) {
+                    zebra_enable = true;
+                }
+                if (mule_hp > 0) {
+                    mule_enable = true;
+                }
+            }
+            function animals() {
+                document.getElementById("donkey_hpbar").innerHTML = "<td>DONKEY</td> <td>| HP: " + donkey_hp + " | </td> <td>WEAPON: " + donkey_weapon + "</td>";
+                
+                if (camel_enable === true) {
+                    document.getElementById("camel_hpbar").innerHTML = "<td>CAMILTON</td> <td>| HP: " + camel_hp + " | </td> <td>WEAPON: " + camel_weapon + "</td>";
+                }
+                if (zebra_enable === true) {
+                    document.getElementById("zebra_hpbar").innerHTML = "<td>ZEBRA</td> <td>| HP: " + zebra_hp + " | </td> <td>WEAPON: " + zebra_weapon + "</td>";
+                }
+                if (mule_enable === true) {
+                    document.getElementById("mule_hpbar").innerHTML = "<td>MULE</td> <td>| HP: " + mule_hp + " | </td> <td>WEAPON: " + mule_weapon + "</td>";
+                }
+            }
+            
+            function animal_pictures() {
+
+                if (camel_enable === true) {
+                    document.getElementById("camel_image").style.visibility = "visible";
+                } else {
+                    document.getElementById("camel_image").style.visibility = "hidden";
+                }
+                
+                if (zebra_enable === true) {
+                    document.getElementById("zebra_image").style.visibility = "visible";
+                } else {
+                    document.getElementById("zebra_image").style.visibility = "hidden";
+                }
+                if (mule_enable === true) {
+                    document.getElementById("mule_image").style.visibility = "visible"; 
+                } else {
+                    document.getElementById("mule_image").style.visibility = "hidden";
+                }
+            }
+            
+            function animal_weapon_pictures() {
+                //donkey
+                if (donkey_weapon === "hooves") {
+                    document.getElementById("donkey_image").src = "donkey.png";
+                }
+                if (donkey_weapon === "bat") {
+                    document.getElementById("donkey_image").src = "donkeybat.png";
+                }
+                if (donkey_weapon === "revolver") {
+                    document.getElementById("donkey_image").src = "donkeyrevolver.png";
+                }
+                if (donkey_weapon === "shotgun") {
+                    document.getElementById("donkey_image").src = "donkeyshotgun.png";
+                }
+                if (donkey_weapon === "sword") {
+                    document.getElementById("donkey_image").src = "donkeysword.png";
+                }
+                if (donkey_weapon === "machinegun") {
+                    document.getElementById("donkey_image").src = "donkeymachinegun.png";
+                }
+                if (donkey_weapon === "rpg") {
+                    document.getElementById("donkey_image").src = "donkeyrpg.png";
+                }
+                
+                //camel
+                if (camel_weapon === "hooves") {
+                    document.getElementById("camel_image").src = "camel.png";
+                }
+                if (camel_weapon === "bat") {
+                    document.getElementById("camel_image").src = "camelbat.png";
+                }
+                if (camel_weapon === "revolver") {
+                    document.getElementById("camel_image").src = "camelrevolver.png";
+                }
+                if (camel_weapon === "shotgun") {
+                    document.getElementById("camel_image").src = "camelshotgun.png";
+                }
+                if (camel_weapon === "sword") {
+                    document.getElementById("camel_image").src = "camelsword.png";
+                }
+                if (camel_weapon === "machinegun") {
+                    document.getElementById("camel_image").src = "camelmachinegun.png";
+                }
+                if (camel_weapon === "rpg") {
+                    document.getElementById("camel_image").src = "camelrpg.png";
+                }
+                
+                //zebra
+                if (zebra_weapon === "hooves") {
+                    document.getElementById("zebra_image").src = "zebra.png";
+                }
+                if (zebra_weapon === "bat") {
+                    document.getElementById("zebra_image").src = "zebrabat.png";
+                }
+                if (zebra_weapon === "revolver") {
+                    document.getElementById("zebra_image").src = "zebrarevolver.png";
+                }
+                if (zebra_weapon === "shotgun") {
+                    document.getElementById("zebra_image").src = "zebrashotgun.png";
+                }
+                if (zebra_weapon === "sword") {
+                    document.getElementById("zebra_image").src = "zebrasword.png";
+                }
+                if (zebra_weapon === "machinegun") {
+                    document.getElementById("zebra_image").src = "zebramachinegun.png";
+                }
+                if (zebra_weapon === "rpg") {
+                    document.getElementById("zebra_image").src = "zebrarpg.png";
+                }
+                
+                //zebra
+                if (mule_weapon === "hooves") {
+                    document.getElementById("mule_image").src = "mule.png";
+                }
+                if (mule_weapon === "bat") {
+                    document.getElementById("mule_image").src = "mulebat.png";
+                }
+                if (mule_weapon === "revolver") {
+                    document.getElementById("mule_image").src = "mulerevolver.png";
+                }
+                if (mule_weapon === "shotgun") {
+                    document.getElementById("mule_image").src = "muleshotgun.png";
+                }
+                if (mule_weapon === "sword") {
+                    document.getElementById("mule_image").src = "mulesword.png";
+                }
+                if (mule_weapon === "machinegun") {
+                    document.getElementById("mule_image").src = "mulemachinegun.png";
+                }
+                if (mule_weapon === "rpg") {
+                    document.getElementById("mule_image").src = "mulerpg.png";
+                }
+                
+            }
+            
+            
+            function next() {
+                document.getElementById("option_buttons").style.visibility = "visible";
+                document.getElementById("next").style.visibility = "hidden";
+                document.getElementById("turn").innerHTML = "Donkey's Turn";
+                document.getElementById("fight_info").innerHTML = "";
+                options();
+                animal_turn = animal_turn + 1;
+            }
+            
+            var animal_turn = 0;
+            function options() {
+                document.getElementById("option_buttons").style.visibility = "visible";
+                if (animal_turn === 0) {
+                    donkey_options();
+                }
+                if (animal_turn === 1) {
+                    if (camel_enable === true) {
+                        camel_options();
+                    } else {
+                        if (zebra_enable === true) {
+                            zebra_options();
+                        } else if (mule_enable === true) {
+                            mule_options();
+                        } else {
+                            fight();
+                        }
+                        
+                    }
+                }
+                if (animal_turn == 2) {
+                    if (zebra_enable === true) {
+                        zebra_options();
+                    } else {
+                        if (mule_enable === true) {
+                            mule_options();
+                        }
+                    }
+                }
+                if (animal_turn == 3) {
+                    if (mule_enable === true) {
+                        mule_options();
+                    } else {
+                        //next();
+                    }
+                }
+                if (animal_turn == 4) {
+                    fight();
+                    animal_turn = -1;
+                }
+            }
+            var attacking_animal = "donkey";
+            function donkey_options() {
+                document.getElementById("turn").innerHTML = "Donkey's Turn";
+                document.getElementById("fight_info").innerHTML = "";
+                attacking_animal = "donkey";
+                
+            }
+            function camel_options() {
+                document.getElementById("turn").innerHTML = "Camilton's Turn";
+                document.getElementById("fight_info").innerHTML = "";
+                attacking_animal = "camel";
+            }
+            function zebra_options() {
+                document.getElementById("turn").innerHTML = "Zebra's Turn";
+                document.getElementById("fight_info").innerHTML = "";
+                attacking_animal = "zebra";
+            }
+            function mule_options() {
+                document.getElementById("turn").innerHTML = "Mule's Turn";
+                document.getElementById("fight_info").innerHTML = "";
+                attacking_animal = "mule";
+            }
+            
+            function switchw() {
+                
+            }
+            
+            function attack() {
+                if (attacking_animal === "donkey") {
+                    donkeyAttack();
+                }
+                if (attacking_animal === "camel") {
+                    camelAttack();
+                }
+                if (attacking_animal === "zebra") {
+                    zebraAttack();
+                }
+                if (attacking_animal === "mule") {
+                    muleAttack();
+                }
+                
+                document.getElementById("fight_info").innerHTML = attacking_animal +" attacks!";
+                document.getElementById("next").style.visibility = "visible";
+                document.getElementById("option_buttons").style.visibility = "hidden";
+            }
+            
+            
+            function detect_enemy() {
+                if (enemy_hp < -1) {
+                    document.getElementById("turn").innerHTML = enemy_name + " died!";
+                    document.getElementById("fight_info").innerHTML = "You won the battle!";
+                    document.getElementById("next").style.visibility = "hidden";
+                    document.getElementById("option_buttons").style.visibility = "hidden";
+                    document.getElementById("encounter").style.visibility = "visible";
+                    enemy_hp = 0;
+                    
+                    if (enemy_name === "Portal" && enemy_hp < 1) {
+                        document.getElementById("encounter").style.visibility = "hidden";
+                        document.getElementById("jerhy").style.visibility = "visible";
+                    }
+                }
+            }
+            
+            var interval = setInterval(crucial_functions, 1);
+            function crucial_functions() {
+                animals();
+                animal_pictures();
+                alive_detection();
+                death_detection();
+                animal_weapon_pictures();
+                detect_enemy();
+            }
+            document.getElementById("jerhy").style.visibility = "hidden";
+            waste_encounter();
+        </script>
+    </body>
+</html>
